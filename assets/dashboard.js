@@ -1,18 +1,322 @@
-// Economic Data State
-let economicData = {
-    gdp: {
-        value: 34e9, // $34 billion
-        growthRate: 0.063 // 6.3%
+// Countries Database with Economic Data
+const countriesData = {
+    'uganda': {
+        name: 'Uganda',
+        gdp: { value: 34e9, growthRate: 0.063 },
+        population: { value: 42.86e6, growthRate: 0.033 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
     },
-    population: {
-        value: 42.86e6, // 42.86 million
-        growthRate: 0.033 // 3.3%
+    'kenya': {
+        name: 'Kenya',
+        gdp: { value: 115e9, growthRate: 0.055 },
+        population: { value: 54.5e6, growthRate: 0.024 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
     },
-    target: {
-        label: 'Lower Middle Income',
-        perCapitaValue: 1025 // $1,025
+    'tanzania': {
+        name: 'Tanzania',
+        gdp: { value: 71e9, growthRate: 0.047 },
+        population: { value: 61.7e6, growthRate: 0.029 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'rwanda': {
+        name: 'Rwanda',
+        gdp: { value: 11.1e9, growthRate: 0.085 },
+        population: { value: 13.5e6, growthRate: 0.025 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'ethiopia': {
+        name: 'Ethiopia',
+        gdp: { value: 127e9, growthRate: 0.063 },
+        population: { value: 120e6, growthRate: 0.025 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'ghana': {
+        name: 'Ghana',
+        gdp: { value: 76e9, growthRate: 0.038 },
+        population: { value: 32.8e6, growthRate: 0.021 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'nigeria': {
+        name: 'Nigeria',
+        gdp: { value: 441e9, growthRate: 0.025 },
+        population: { value: 218e6, growthRate: 0.026 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'south-africa': {
+        name: 'South Africa',
+        gdp: { value: 419e9, growthRate: 0.012 },
+        population: { value: 60e6, growthRate: 0.013 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'egypt': {
+        name: 'Egypt',
+        gdp: { value: 469e9, growthRate: 0.035 },
+        population: { value: 105e6, growthRate: 0.018 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'morocco': {
+        name: 'Morocco',
+        gdp: { value: 133e9, growthRate: 0.032 },
+        population: { value: 37.5e6, growthRate: 0.011 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'senegal': {
+        name: 'Senegal',
+        gdp: { value: 27e9, growthRate: 0.055 },
+        population: { value: 17.2e6, growthRate: 0.028 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'ivory-coast': {
+        name: 'Ivory Coast',
+        gdp: { value: 70e9, growthRate: 0.065 },
+        population: { value: 27.5e6, growthRate: 0.025 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'cameroon': {
+        name: 'Cameroon',
+        gdp: { value: 45e9, growthRate: 0.032 },
+        population: { value: 27.2e6, growthRate: 0.026 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'zambia': {
+        name: 'Zambia',
+        gdp: { value: 26e9, growthRate: 0.042 },
+        population: { value: 19.6e6, growthRate: 0.029 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'botswana': {
+        name: 'Botswana',
+        gdp: { value: 18e9, growthRate: 0.035 },
+        population: { value: 2.4e6, growthRate: 0.019 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'mauritius': {
+        name: 'Mauritius',
+        gdp: { value: 14e9, growthRate: 0.028 },
+        population: { value: 1.3e6, growthRate: 0.003 },
+        target: { label: 'High Income', perCapitaValue: 12695 }
+    },
+    'tunisia': {
+        name: 'Tunisia',
+        gdp: { value: 46e9, growthRate: 0.022 },
+        population: { value: 12e6, growthRate: 0.01 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'algeria': {
+        name: 'Algeria',
+        gdp: { value: 191e9, growthRate: 0.018 },
+        population: { value: 45e6, growthRate: 0.018 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'angola': {
+        name: 'Angola',
+        gdp: { value: 123e9, growthRate: 0.02 },
+        population: { value: 34e6, growthRate: 0.032 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'mozambique': {
+        name: 'Mozambique',
+        gdp: { value: 16e9, growthRate: 0.045 },
+        population: { value: 32.2e6, growthRate: 0.029 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'madagascar': {
+        name: 'Madagascar',
+        gdp: { value: 15e9, growthRate: 0.038 },
+        population: { value: 29e6, growthRate: 0.026 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'mali': {
+        name: 'Mali',
+        gdp: { value: 19e9, growthRate: 0.035 },
+        population: { value: 21.5e6, growthRate: 0.03 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'burkina-faso': {
+        name: 'Burkina Faso',
+        gdp: { value: 17e9, growthRate: 0.042 },
+        population: { value: 22.1e6, growthRate: 0.029 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'niger': {
+        name: 'Niger',
+        gdp: { value: 13e9, growthRate: 0.035 },
+        population: { value: 25.3e6, growthRate: 0.038 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'chad': {
+        name: 'Chad',
+        gdp: { value: 11e9, growthRate: 0.025 },
+        population: { value: 17.2e6, growthRate: 0.03 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'benin': {
+        name: 'Benin',
+        gdp: { value: 17e9, growthRate: 0.058 },
+        population: { value: 12.5e6, growthRate: 0.026 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'togo': {
+        name: 'Togo',
+        gdp: { value: 8e9, growthRate: 0.052 },
+        population: { value: 8.4e6, growthRate: 0.024 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'guinea': {
+        name: 'Guinea',
+        gdp: { value: 16e9, growthRate: 0.045 },
+        population: { value: 13.5e6, growthRate: 0.026 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'sierra-leone': {
+        name: 'Sierra Leone',
+        gdp: { value: 4e9, growthRate: 0.042 },
+        population: { value: 8.2e6, growthRate: 0.021 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'liberia': {
+        name: 'Liberia',
+        gdp: { value: 3.2e9, growthRate: 0.048 },
+        population: { value: 5.2e6, growthRate: 0.025 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'gambia': {
+        name: 'Gambia',
+        gdp: { value: 2e9, growthRate: 0.052 },
+        population: { value: 2.5e6, growthRate: 0.029 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'cape-verde': {
+        name: 'Cape Verde',
+        gdp: { value: 2e9, growthRate: 0.035 },
+        population: { value: 0.56e6, growthRate: 0.011 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'djibouti': {
+        name: 'Djibouti',
+        gdp: { value: 3.5e9, growthRate: 0.065 },
+        population: { value: 1e6, growthRate: 0.015 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'eritrea': {
+        name: 'Eritrea',
+        gdp: { value: 2.1e9, growthRate: 0.025 },
+        population: { value: 3.6e6, growthRate: 0.018 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'somalia': {
+        name: 'Somalia',
+        gdp: { value: 5.2e9, growthRate: 0.035 },
+        population: { value: 16.4e6, growthRate: 0.029 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'sudan': {
+        name: 'Sudan',
+        gdp: { value: 34e9, growthRate: 0.015 },
+        population: { value: 45.7e6, growthRate: 0.024 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'south-sudan': {
+        name: 'South Sudan',
+        gdp: { value: 3.1e9, growthRate: 0.02 },
+        population: { value: 11.4e6, growthRate: 0.019 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'central-african-republic': {
+        name: 'Central African Republic',
+        gdp: { value: 2.3e9, growthRate: 0.025 },
+        population: { value: 5e6, growthRate: 0.021 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'democratic-republic-congo': {
+        name: 'Democratic Republic of Congo',
+        gdp: { value: 55e9, growthRate: 0.045 },
+        population: { value: 95.9e6, growthRate: 0.032 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'republic-congo': {
+        name: 'Republic of Congo',
+        gdp: { value: 12e9, growthRate: 0.028 },
+        population: { value: 5.7e6, growthRate: 0.025 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'gabon': {
+        name: 'Gabon',
+        gdp: { value: 19e9, growthRate: 0.025 },
+        population: { value: 2.3e6, growthRate: 0.022 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'equatorial-guinea': {
+        name: 'Equatorial Guinea',
+        gdp: { value: 12e9, growthRate: 0.018 },
+        population: { value: 1.5e6, growthRate: 0.032 },
+        target: { label: 'High Income', perCapitaValue: 12695 }
+    },
+    'sao-tome-principe': {
+        name: 'São Tomé and Príncipe',
+        gdp: { value: 0.47e9, growthRate: 0.035 },
+        population: { value: 0.22e6, growthRate: 0.019 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'comoros': {
+        name: 'Comoros',
+        gdp: { value: 1.2e9, growthRate: 0.025 },
+        population: { value: 0.88e6, growthRate: 0.022 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'seychelles': {
+        name: 'Seychelles',
+        gdp: { value: 1.7e9, growthRate: 0.035 },
+        population: { value: 0.099e6, growthRate: 0.008 },
+        target: { label: 'High Income', perCapitaValue: 12695 }
+    },
+    'malawi': {
+        name: 'Malawi',
+        gdp: { value: 12e9, growthRate: 0.042 },
+        population: { value: 19.9e6, growthRate: 0.026 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'zimbabwe': {
+        name: 'Zimbabwe',
+        gdp: { value: 26e9, growthRate: 0.035 },
+        population: { value: 15.2e6, growthRate: 0.018 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'namibia': {
+        name: 'Namibia',
+        gdp: { value: 12e9, growthRate: 0.025 },
+        population: { value: 2.5e6, growthRate: 0.018 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'lesotho': {
+        name: 'Lesotho',
+        gdp: { value: 2.5e9, growthRate: 0.025 },
+        population: { value: 2.2e6, growthRate: 0.012 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'eswatini': {
+        name: 'Eswatini',
+        gdp: { value: 4.7e9, growthRate: 0.022 },
+        population: { value: 1.2e6, growthRate: 0.01 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
+    },
+    'burundi': {
+        name: 'Burundi',
+        gdp: { value: 3.1e9, growthRate: 0.038 },
+        population: { value: 12.6e6, growthRate: 0.031 },
+        target: { label: 'Lower Middle Income', perCapitaValue: 1025 }
+    },
+    'libya': {
+        name: 'Libya',
+        gdp: { value: 48e9, growthRate: 0.025 },
+        population: { value: 6.9e6, growthRate: 0.013 },
+        target: { label: 'Upper Middle Income', perCapitaValue: 4045 }
     }
 };
+
+// Current selected country and economic data
+let currentCountry = 'uganda';
+let economicData = {};
 
 // Chart instances
 let charts = {};
@@ -23,15 +327,56 @@ Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
 
 // Initialize dashboard
 document.addEventListener('DOMContentLoaded', function() {
+    loadCountryData(currentCountry);
     initializeCharts();
     setupEventListeners();
     updateAllDisplays();
 });
 
+// Load country data
+function loadCountryData(countryCode) {
+    if (countriesData[countryCode]) {
+        economicData = JSON.parse(JSON.stringify(countriesData[countryCode]));
+        currentCountry = countryCode;
+        updateCountryTitle();
+        updateFormInputs();
+    }
+}
+
+// Update dashboard title
+function updateCountryTitle() {
+    const titleElement = document.getElementById('dashboard-title');
+    const countrySelect = document.getElementById('country-select');
+    if (titleElement && economicData.name) {
+        titleElement.textContent = `${economicData.name} Economic Dashboard`;
+    }
+    if (countrySelect) {
+        countrySelect.value = currentCountry;
+    }
+}
+
+// Update form inputs with current country data
+function updateFormInputs() {
+    document.getElementById('gdp-value').value = (economicData.gdp.value / 1e9).toFixed(1);
+    document.getElementById('gdp-growth').value = (economicData.gdp.growthRate * 100).toFixed(1);
+    document.getElementById('population-value').value = (economicData.population.value / 1e6).toFixed(2);
+    document.getElementById('population-growth').value = (economicData.population.growthRate * 100).toFixed(1);
+    document.getElementById('target-label').value = economicData.target.label;
+    document.getElementById('target-value').value = economicData.target.perCapitaValue;
+}
+
+// Handle country selection change
+function handleCountryChange(event) {
+    const selectedCountry = event.target.value;
+    loadCountryData(selectedCountry);
+    updateAllDisplays();
+    updateAllCharts();
+}
+
 // Setup form event listeners
 function setupEventListeners() {
     const inputs = [
-        'gdp-value', 'gdp-growth', 
+        'gdp-value', 'gdp-growth',
         'population-value', 'population-growth',
         'target-label', 'target-value'
     ];
@@ -42,6 +387,12 @@ function setupEventListeners() {
             input.addEventListener('input', handleInputChange);
         }
     });
+
+    // Add country selector event listener
+    const countrySelect = document.getElementById('country-select');
+    if (countrySelect) {
+        countrySelect.addEventListener('change', handleCountryChange);
+    }
 }
 
 // Handle input changes
