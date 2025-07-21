@@ -4,7 +4,7 @@ An interactive web dashboard displaying Uganda's economic indicators and growth 
 
 ## 🚀 Live Demo
 
-**Current Deployment**: https://kenya-economic-dashboard-qk4rcobn0-hezronkimutais-projects.vercel.app
+**Current Deployment**: https://kenya-economic-dashboard.vercel.app/
 
 ## 📊 Features
 
