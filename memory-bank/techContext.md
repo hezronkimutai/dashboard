@@ -2,127 +2,173 @@
 
 ## Technology Stack
 
-### Frontend Framework
-- **React 16.6.0**: Component-based UI framework
-- **TypeScript 3.1.5**: Type-safe JavaScript development
-- **Material-UI 3.3.2**: Google Material Design components
-- **Recompose 0.30.0**: Higher-order component utilities
+### Frontend Technologies
+- **HTML5**: Semantic markup with modern web standards
+- **CSS3**: Material Design-inspired styling with CSS Grid and Flexbox
+- **Vanilla JavaScript ES6+**: Modern JavaScript without frameworks
+- **Chart.js 4.x**: Interactive data visualization library
 
-### Development Tools
-- **Create React App 2.1.0**: Build tooling and development server
-- **TSLint 5.11.0**: TypeScript linting with Airbnb config
-- **Jest**: Testing framework with 100% coverage requirements
-- **Enzyme**: React component testing utilities
-
-### Deployment & CI/CD
-- **GitHub Pages**: Static site hosting at https://256-io.github.io/dashboard/
-- **Travis CI**: Continuous integration pipeline
-- **Yarn**: Package management and dependency resolution
+### Development Approach
+- **No Build Process**: Direct development with standard web technologies
+- **CDN Dependencies**: Chart.js loaded from jsdelivr CDN
+- **Static Hosting**: Optimized for Vercel, GitHub Pages, or any static host
+- **Progressive Enhancement**: Works without JavaScript for basic functionality
 
 ## Architecture Overview
 
-### Component Structure
+### File Structure
 ```
-src/
-├── App/                    # Main application container
-│   ├── index.tsx          # App component with state management
-│   ├── context/           # React Context for data sharing
-│   ├── data-form/         # User input components
-│   ├── titles/            # Header/title components
-│   └── visualizations/    # Economic data visualizations
-│       ├── gdp/
-│       ├── gdp-growth/
-│       ├── per-capita/
-│       ├── per-capita-growth/
-│       ├── middle-income/
-│       └── time-to-middle-income/
+dashboard/
+├── index.html              # Main dashboard interface
+├── assets/
+│   ├── styles.css         # Complete styling system
+│   └── dashboard.js       # Interactive functionality
+├── memory-bank/           # Development documentation
+├── vercel.json           # Deployment configuration
+└── README.md             # Project documentation
 ```
 
-### State Management Pattern
-- **Recompose withState**: Simple state management for data
-- **React Context**: Global data sharing across components
-- **Default Context**: Predefined economic data for Uganda
-
-### Theme Configuration
-- **Material-UI Dark Theme**: Professional appearance
-- **Yellow Accent Color**: Brand identity (`yellow['A700']`)
-- **Typography**: Next variants enabled for modern styling
-
-## Development Standards
-
-### Code Quality
-- **100% Test Coverage**: Required for all functions, lines, branches, statements
-- **TypeScript Strict**: Full type safety enforcement
-- **TSLint Airbnb**: Consistent code style
-- **Component Testing**: Each component has dedicated test file
-
-### File Organization
-- **Index Pattern**: Each directory exports through `index.tsx`
-- **Co-located Tests**: Test files alongside source files
-- **Type Definitions**: Comprehensive TypeScript interfaces
-
-### Testing Strategy
-```javascript
-// Coverage thresholds (100% required)
-"coverageThreshold": {
-  "global": {
-    "branches": 100,
-    "functions": 100,
-    "lines": 100,
-    "statements": 100
-  }
-}
-```
+### Component Architecture
+- **Modular CSS**: Component-based styling with BEM-like methodology
+- **Event-Driven JavaScript**: Clean separation of data, logic, and presentation
+- **Chart.js Integration**: Dynamic chart creation and updates
+- **Responsive Design**: Mobile-first CSS Grid and Flexbox layouts
 
 ## Data Architecture
 
 ### Economic Data Model
-```typescript
-interface ContextType {
+```javascript
+economicData = {
   gdp: {
-    value: number;        // Current GDP in dollars
-    growthRate: number;   // Annual growth rate
-  };
+    value: 34e9,        // GDP in dollars
+    growthRate: 0.063   // Annual growth rate (6.3%)
+  },
   population: {
-    value: number;        // Current population
-    growthRate: number;   // Annual growth rate
-  };
+    value: 42.86e6,     // Population count
+    growthRate: 0.033   // Annual growth rate (3.3%)
+  },
   target: {
-    label: string;        // Income classification goal
-    perCapitaValue: number; // Target per capita income
-  };
+    label: 'Lower Middle Income',
+    perCapitaValue: 1025  // Target per capita income
+  }
 }
 ```
 
-### Default Economic Data
-- **GDP**: $34 billion (6.3% growth)
-- **Population**: 42.86 million (3.3% growth)
-- **Target**: Lower Middle Income ($1,025 per capita)
+### Calculation Engine
+- **Real-time Metrics**: GDP per capita, growth projections, years to target
+- **Compound Growth**: Accurate economic forecasting formulas
+- **Dynamic Updates**: All calculations update instantly with form changes
 
-## Build & Deployment
+## Chart.js Implementation
 
-### Scripts Available
-- `npm start`: Development server
-- `npm build`: Production build
-- `npm test`: Run test suite
-- `npm run test:coverage`: Coverage report
-- `npm run lint`: Code style checking
+### Chart Types Used
+- **Line Charts**: GDP and per capita trend projections
+- **Doughnut Charts**: Growth rate and progress visualizations
+- **Bar Charts**: Years-to-target display
+
+### Chart Configuration
+```javascript
+Chart.defaults.color = '#ffffff';           // Dark theme text
+Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';  // Grid lines
+```
+
+### Interactive Features
+- **Real-time Updates**: Charts redraw on data changes
+- **Responsive Design**: Charts adapt to container size
+- **Hover Effects**: Interactive tooltips and animations
+
+## Styling System
+
+### CSS Architecture
+- **CSS Grid**: Main layout system for responsive design
+- **Flexbox**: Component-level alignment and distribution
+- **CSS Custom Properties**: Color theming and spacing system
+- **Material Design**: Google's design language adapted for dark theme
+
+### Color Palette
+- **Primary Background**: #303030 (dark gray)
+- **Card Background**: #424242 (medium gray)
+- **Accent Color**: #ffc107 (amber/yellow)
+- **Text Primary**: #ffffff (white)
+- **Text Secondary**: rgba(255, 255, 255, 0.7)
+
+### Responsive Breakpoints
+- **Mobile**: < 480px (single column, compact charts)
+- **Tablet**: 480px - 768px (two columns)
+- **Desktop**: > 768px (three columns, full features)
+
+## JavaScript Architecture
+
+### Module Pattern
+```javascript
+// State management
+let economicData = { /* data structure */ };
+let charts = {};  // Chart.js instances
+
+// Event handling
+function setupEventListeners() { /* form events */ }
+function handleInputChange(event) { /* data updates */ }
+
+// Chart management
+function initializeCharts() { /* create all charts */ }
+function updateAllCharts() { /* refresh visualizations */ }
+
+// Calculations
+function calculateMetrics() { /* economic formulas */ }
+function updateAllDisplays() { /* UI updates */ }
+```
+
+### Performance Optimizations
+- **Event Delegation**: Efficient form input handling
+- **Chart Reuse**: Update existing charts instead of recreation
+- **Debounced Updates**: Smooth interactions without performance issues
+
+## Deployment Architecture
+
+### Static Site Optimization
+- **Zero Build Process**: Direct file serving
+- **CDN Assets**: External Chart.js reduces bundle size
+- **Gzip Compression**: Automatic on Vercel platform
+- **Cache Headers**: Optimized caching strategy
+
+### Vercel Configuration
+```json
+{
+  "cleanUrls": true,
+  "trailingSlash": false
+}
+```
 
 ### Browser Support
-- Modern browsers (>0.2% usage)
-- No Internet Explorer support
-- No Opera Mini support
+- **Modern Browsers**: Chrome 60+, Firefox 60+, Safari 12+, Edge 79+
+- **Mobile Browsers**: iOS Safari 12+, Chrome Mobile 60+
+- **Progressive Enhancement**: Basic functionality without JavaScript
 
-## Development Environment
-- **Node.js**: Required for build tools
-- **Yarn**: Preferred package manager
-- **TypeScript**: Full IDE support needed
-- **Git**: Version control with GitHub integration
+## Development Workflow
 
-## Performance Considerations
-- **Grid Layout**: CSS Grid for responsive visualization layout
-- **Component Splitting**: Modular visualization components
-- **Static Build**: Optimized for GitHub Pages deployment
-- **Material-UI**: Tree-shaking for smaller bundle size
+### Local Development
+1. Open `index.html` in browser (no server required)
+2. Edit files directly (instant feedback)
+3. Test in multiple browsers and devices
+4. Deploy to Vercel with `vercel --prod`
 
-This technical foundation provides a solid, maintainable platform for Uganda's economic dashboard with modern development practices and comprehensive testing.
+### Code Quality
+- **Semantic HTML**: Proper document structure and accessibility
+- **Modern CSS**: Grid, Flexbox, custom properties
+- **ES6+ JavaScript**: Arrow functions, const/let, modules pattern
+- **Performance**: Optimized for mobile and slow connections
+
+## Security & Accessibility
+
+### Security Features
+- **No Server-Side Code**: Static files eliminate server vulnerabilities
+- **CDN Dependencies**: Trusted Chart.js from jsdelivr
+- **No User Data Storage**: All data is client-side and temporary
+
+### Accessibility Features
+- **Semantic HTML**: Screen reader friendly structure
+- **Color Contrast**: WCAG 2.1 AA compliant color ratios
+- **Keyboard Navigation**: Full functionality without mouse
+- **Responsive Text**: Scalable fonts and layouts
+
+This modern web architecture provides excellent performance, maintainability, and user experience while eliminating the complexity of build processes and framework dependencies.

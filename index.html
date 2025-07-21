@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uganda Economic Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Uganda Economic Dashboard</h1>
+            <p class="subtitle">Open Source Economic Data Visualization Platform</p>
+        </header>
+
+        <!-- Data Input Forms -->
+        <div class="forms-section">
+            <div class="form-card">
+                <h3 class="form-title">GDP Settings</h3>
+                <div class="form-group">
+                    <label for="gdp-value">GDP (Billions USD)</label>
+                    <input type="number" id="gdp-value" value="34" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="gdp-growth">Growth Rate (%)</label>
+                    <input type="number" id="gdp-growth" value="6.3" step="0.1">
+                </div>
+            </div>
+
+            <div class="form-card">
+                <h3 class="form-title">Population Settings</h3>
+                <div class="form-group">
+                    <label for="population-value">Population (Millions)</label>
+                    <input type="number" id="population-value" value="42.86" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="population-growth">Growth Rate (%)</label>
+                    <input type="number" id="population-growth" value="3.3" step="0.1">
+                </div>
+            </div>
+
+            <div class="form-card">
+                <h3 class="form-title">Target Settings</h3>
+                <div class="form-group">
+                    <label for="target-label">Classification Goal</label>
+                    <input type="text" id="target-label" value="Lower Middle Income">
+                </div>
+                <div class="form-group">
+                    <label for="target-value">Target Per Capita (USD)</label>
+                    <input type="number" id="target-value" value="1025" step="1">
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualizations Grid -->
+        <div class="visualizations-grid">
+            <!-- GDP Chart -->
+            <div class="chart-card">
+                <h3 class="chart-title">Gross Domestic Product</h3>
+                <div class="chart-container">
+                    <canvas id="gdp-chart"></canvas>
+                </div>
+                <div class="metric-summary">
+                    <span class="metric-value" id="gdp-display">$34.0B</span>
+                    <span class="metric-growth" id="gdp-growth-display">6.3% Growth</span>
+                </div>
+            </div>
+
+            <!-- Per Capita Chart -->
+            <div class="chart-card">
+                <h3 class="chart-title">GDP Per Capita</h3>
+                <div class="chart-container">
+                    <canvas id="per-capita-chart"></canvas>
+                </div>
+                <div class="metric-summary">
+                    <span class="metric-value" id="per-capita-display">$794</span>
+                    <span class="metric-growth" id="per-capita-growth-display">2.9% Growth</span>
+                </div>
+            </div>
+
+            <!-- GDP Growth Chart -->
+            <div class="chart-card">
+                <h3 class="chart-title">GDP Growth Rate</h3>
+                <div class="chart-container">
+                    <canvas id="gdp-growth-chart"></canvas>
+                </div>
+                <div class="metric-summary">
+                    <span class="metric-value" id="gdp-growth-rate-display">6.3%</span>
+                    <span class="metric-growth">Annual Growth Rate</span>
+                </div>
+            </div>
+
+            <!-- Per Capita Growth Chart -->
+            <div class="chart-card">
+                <h3 class="chart-title">Per Capita Growth</h3>
+                <div class="chart-container">
+                    <canvas id="per-capita-growth-chart"></canvas>
+                </div>
+                <div class="metric-summary">
+                    <span class="metric-value" id="per-capita-growth-rate-display">2.9%</span>
+                    <span class="metric-growth">Per Capita Growth</span>
+                </div>
+            </div>
+
+            <!-- Middle Income Progress -->
+            <div class="chart-card">
+                <h3 class="chart-title">Middle Income Progress</h3>
+                <div class="chart-container">
+                    <canvas id="middle-income-chart"></canvas>
+                </div>
+                <div class="metric-summary">
+                    <span class="metric-value" id="progress-display">77.5%</span>
+                    <span class="metric-growth">Progress to Target</span>
+                </div>
+            </div>
+
+            <!-- Time to Middle Income -->
+            <div class="chart-card">
+                <h3 class="chart-title">Time to Middle Income</h3>
+                <div class="chart-container">
+                    <canvas id="time-to-middle-chart"></canvas>
+                </div>
+                <div class="metric-summary">
+                    <span class="metric-value" id="years-display">8.2</span>
+                    <span class="metric-growth">Years to Target</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Uganda Economic Dashboard &copy; 2024 | Open Source Project | 
+            <a href="https://github.com/256-io/dashboard" target="_blank">View on GitHub</a></p>
+        </footer>
+    </div>
+
+    <script src="assets/dashboard.js"></script>
+</body>
+</html>
